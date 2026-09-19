@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Please Forgive Me ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+}
+
+/* Main screen */
+body {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+}
+
+/* Moving SORRY area */
+#sorryContainer {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+}
+
+/* SORRY text */
+.sorry {
+    position: absolute;
+    color: white;
+    font-weight: bold;
+    white-space: nowrap;
+    user-select: none;
+    pointer-events: none;
+
+    animation-name: move;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+/* Movement */
+@keyframes move {
+    0% {
+        transform: translateX(-150px);
+    }
+
+    100% {
+        transform: translateX(calc(100vw + 150px));
+    }
+}
+
+/* Center button */
+#forgiveButton {
+    position: fixed;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    z-index: 1000;
+
+    border: none;
+    outline: none;
+
+    padding: 20px 34px;
+
+    border-radius: 60px;
+
+    background: white;
+    color: #ff416c;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,0.30);
+
+    cursor: pointer;
+}
+
+#forgiveButton:active {
+    transform: translate(-50%, -50%) scale(0.94);
+}
+
+/* Final screen */
+#thankYou {
+    display: none;
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 2000;
+
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+
+    color: white;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    padding: 25px;
+}
+
+.message {
+    max-width: 450px;
+}
+
+.message h1 {
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+.message p {
+    font-size: 21px;
+    line-height: 1.6;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ONLY moving SORRY -->
+<div id="sorryContainer"></div>
+
+<!-- CENTER BUTTON -->
+<button id="forgiveButton">
+    ❤️ PLEASE FORGIVE ME
+</button>
+
+<!-- AFTER FORGIVENESS -->
+<div id="thankYou">
+
+    <div class="message">
+
+        <h1>❤️ Thank You!</h1>
+
+        <p>
+            Thank you for forgiving me.<br><br>
+            I promise I won't make this mistake again.
+        </p>
+
+        <div style="font-size:55px;">
+            🥹❤️
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+const container = document.getElementById("sorryContainer");
+
+const totalSorry = 35;
+
+/* Create moving SORRY texts */
+for (let i = 0; i < totalSorry; i++) {
+
+    const sorry = document.createElement("div");
+
+    sorry.className = "sorry";
+    sorry.textContent = "SORRY";
+
+    /* Random vertical position */
+    sorry.style.top = Math.random() * 100 + "vh";
+
+    /* Random size */
+    sorry.style.fontSize =
+        (18 + Math.random() * 16) + "px";
+
+    /* Random speed */
+    sorry.style.animationDuration =
+        (4 + Math.random() * 7) + "s";
+
+    /* Different starting positions */
+    sorry.style.animationDelay =
+        (-Math.random() * 10) + "s";
+
+    container.appendChild(sorry);
+}
+
+
+/* Forgive button */
+document.getElementById("forgiveButton").onclick = function() {
+
+    /* Remove all SORRY */
+    container.innerHTML = "";
+
+    /* Remove button */
+    this.remove();
+
+    /* Show thank-you message */
+    document.getElementById("thankYou").style.display = "flex";
+};
+
+</script>
+
+</body>
+  </html>
